@@ -51,20 +51,44 @@ public class crudtable {
             String selectAll = "SELECT * FROM students";
             ResultSet rs = stmt.executeQuery(selectAll);
             
-            System.out.println("\n--- Students Table ---");
+            // System.out.println("\n--- Students Table ---");
+            // System.out.println("ID\tName\tAddress\t\tEmail");
+            // System.out.println("-----------------------------------------------");
+            
+            // while (rs.next()) {
+            //     int id = rs.getInt("id");
+            //     String name = rs.getString("name");
+            //     String address = rs.getString("address");
+            //     String email = rs.getString("email");
+                
+            //     System.out.println(id + "\t" + name + "\t" + address + "\t\t" + email);
+            // }
+            
+            rs.close();
+            
+            // Delete student with ID 2
+            String deleteQuery = "DELETE FROM students WHERE id = 2";
+            int rowsDeleted = stmt.executeUpdate(deleteQuery);
+            System.out.println("\n" + rowsDeleted + " record(s) deleted (ID = 2)");
+            
+            // Display table after deletion
+            String selectAfterDelete = "SELECT * FROM students";
+            ResultSet rs2 = stmt.executeQuery(selectAfterDelete);
+            
+            System.out.println("\n--- Students Table After Deletion ---");
             System.out.println("ID\tName\tAddress\t\tEmail");
             System.out.println("-----------------------------------------------");
             
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String address = rs.getString("address");
-                String email = rs.getString("email");
+            while (rs2.next()) {
+                int id = rs2.getInt("id");
+                String name = rs2.getString("name");
+                String address = rs2.getString("address");
+                String email = rs2.getString("email");
                 
                 System.out.println(id + "\t" + name + "\t" + address + "\t\t" + email);
             }
             
-            rs.close();
+            rs2.close();
             
         } catch (ClassNotFoundException e) {
             System.err.println("MySQL JDBC Driver not found!");
